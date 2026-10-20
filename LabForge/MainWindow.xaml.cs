@@ -25,13 +25,22 @@ namespace LabForge
             if (result == true)
             {
                 SelectedFileText.Text = "Выбран файл: " + dialog.FileName;
+                StatusText.Text = "Чтение документа...";
 
                 try
                 {
                     MethodologyReader reader = new MethodologyReader();
                     string text = reader.ReadWordDocument(dialog.FileName);
-
-                    DocumentText.Text = text;
+                    if(string.IsNullOrWhiteSpace(text))
+                    {
+                        DocumentText.Text = "В документе не найдено текста.";
+                        StatusText.Text = "Текст не найден.";
+                    }
+                    else
+                    {
+                        DocumentText.Text = text;
+                        StatusText.Text = "Документ успешно прочитан.";
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -40,6 +49,7 @@ namespace LabForge
                         "Ошибка",
                         MessageBoxButton.OK,
                         MessageBoxImage.Error);
+                    StatusText.Text = "Ошибка при чтении документа.";
                 }
             }
         }

@@ -13,9 +13,14 @@ public class MethodologyReader
 
         if (body == null)
         {
-            return "У документі не знайдено тексту.";
+            return string.Empty;
         }
 
-        return body.InnerText;
+        string text = body.InnerText;
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            return "Документ пустой";
+        }
+        return text;
     }
 }
