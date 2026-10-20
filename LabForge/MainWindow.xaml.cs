@@ -53,5 +53,11 @@ namespace LabForge
                 }
             }
         }
+        private void ClearButton_Click(object sender, RoutedEventArgs e)
+        {
+            SelectedFileText.Text = "Методичка не выбрана";
+            DocumentText.Text = "Здесь появится содержимое документа.";
+            StatusText.Text = "Ожидание выбора методички";
+        }
     }
 }

@@ -22,6 +22,10 @@
                     Height="40"
                     Margin="0,25,0,0"
                     Click="SelectFileButton_Click"/>
+            <Button Content="Отчистить"
+                    Height="35"
+                    Margin="0,10,0,0"
+                    Click="ClearButton_Click"/>
             <TextBlock x:Name="SelectedFileText"
                        Text="Методичка не выбрана"
                        Margin="0,15,0,0"
