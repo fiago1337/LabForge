@@ -14,24 +14,41 @@ namespace LabForge
 
         private void SelectFileButton_Click(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.OpenFileDialog dialog =
-                new Microsoft.Win32.OpenFileDialog();
+            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
 
             dialog.Title = "Выберите файл с методичкой";
-            dialog.Filter = "Документы Word (*.docx)|*.docx";
+            dialog.Filter = "Документы (*.docx;*.pdf)|*.docx;*.pdf";
 
             bool? result = dialog.ShowDialog();
 
             if (result == true)
             {
-                SelectedFileText.Text = "Выбран файл: " + dialog.FileName;
+                string fileName = System.IO.Path.GetFileName(dialog.FileName);
+                SelectedFileText.Text = "Выбран файл: " + fileName;
+                DocumentText.Text = "Загрузка текста...";
                 StatusText.Text = "Чтение документа...";
 
                 try
                 {
-                    MethodologyReader reader = new MethodologyReader();
-                    string text = reader.ReadWordDocument(dialog.FileName);
-                    if(string.IsNullOrWhiteSpace(text))
+                    string extension = System.IO.Path.GetExtension(dialog.FileName);
+                    string text;
+
+                    if (extension.Equals(".docx", StringComparison.OrdinalIgnoreCase))
+                    {
+                        MethodologyReader reader = new MethodologyReader();
+                        text = reader.ReadWordDocument(dialog.FileName);
+                    }
+                    else if (extension.Equals(".pdf", StringComparison.OrdinalIgnoreCase))
+                    {
+                        PdfReaderService reader = new PdfReaderService();
+                        text = reader.ReadPdfDocument(dialog.FileName);
+                    }
+                    else
+                    {
+                        text = "";
+                    }
+
+                    if (string.IsNullOrWhiteSpace(text))
                     {
                         DocumentText.Text = "В документе не найдено текста.";
                         StatusText.Text = "Текст не найден.";
