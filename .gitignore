@@ -8,3 +8,6 @@
 # User-specific files
 *.user
 *.suo
+
+# Local API key
+api.json
