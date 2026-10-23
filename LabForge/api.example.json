@@ -1,0 +1,6 @@
+{
+  "Gemini": {
+    "ApiKey": "ВСТАВЬ_СЮДА_API_КЛЮЧ",
+    "Model": "gemini-2.5-flash"
+  }
+}
