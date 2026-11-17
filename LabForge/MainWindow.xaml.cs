@@ -1,4 +1,3 @@
-﻿
 using System;
 using System.Windows;
 using LabForge.Services;
@@ -64,7 +63,6 @@ namespace LabForge
                     MessageBox.Show(
                         "Не удалось прочитать документ:\n" + ex.Message,
                         "Ошибка",
-                        MessageBoxButton.OK,
                         MessageBoxImage.Error);
                     StatusText.Text = "Ошибка при чтении документа.";
                 }
